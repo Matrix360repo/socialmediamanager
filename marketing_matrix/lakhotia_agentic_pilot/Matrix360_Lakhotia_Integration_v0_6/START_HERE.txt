@@ -1,0 +1,20 @@
+MATRIX 360 — LAKHOTIA INTEGRATION v0.6
+
+Tanmayi: All code integration has been prepared. Your role is to approve the preview output.
+
+1. STOP the currently running server using Ctrl+C in its Command Prompt window.
+2. Extract this ZIP. Copy BOTH install_upgrade.py and the whole upgrade_files folder into Desktop\marketing_matrix\lakhotia_agentic_pilot.
+3. In that existing project folder, click File Explorer address bar, type cmd, and press Enter.
+4. Run: python install_upgrade.py
+5. Run: python -m pip install -r requirements.txt
+6. Run: python -m uvicorn app:app --reload --host 127.0.0.1 --port 8001
+7. In browser open http://127.0.0.1:8001/health then http://127.0.0.1:8001/
+8. Submit the topic 'Industrial Land for Manufacturing Expansion'. You will see JSON after submission (this is expected).
+9. Click the browser Back button, go to Review queue on dashboard, and click the new Review entry to see 3 rendered images.
+10. Inspect artwork and copy. Approve only if accurate, then download PNGs.
+
+PRESERVATION: Installer makes backups of code and brand_profile.json; it never edits data/pilot.sqlite3.
+
+LIMITATIONS: This is local prototype with proof-grade templates, not pixel-identical to original designs. In offline mode, drafts are deterministic. AI requires configured OPENAI_API_KEY. Do not publish this app publicly with no authentication. Even with MATRIX360_API_KEY enabled, real production deployment requires persistent storage, user authentication and comprehensive access controls.
+
+N8N CLOUD: do not replace placeholder API URL with localhost. Secure HTTPS deployment and credential setup still pending.

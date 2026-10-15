@@ -1,0 +1,27 @@
+{
+  "client_id": "lakhotia_industrial_complex",
+  "client_name": "Lakhotia Industrial Complex",
+  "parent_brand": "Lakhotia Group",
+  "contacts": {"phone": "+91 74500 08999", "website": "https://www.lakhotiaindustrialcomplex.com/", "email": "info@lakhotiaindustrialcomplex.com"},
+  "positioning": "Industrial land development and consultative business planning for manufacturing, warehousing and logistics enterprises.",
+  "location": "Ranihati–Amta Road, Howrah, West Bengal",
+  "audiences": ["manufacturers", "warehousing companies", "3PL and logistics operators", "business owners planning expansion"],
+  "voice": ["professional", "consultative", "business-first", "credible", "future-oriented"],
+  "palette_suggested": {"deep_green": "#053B35", "navy": "#102A48", "orange": "#E9561A", "off_white": "#FAF8F5"},
+  "approved_claims": [
+    "Located on Ranihati–Amta Road, Howrah",
+    "Approximately 4 km from NH-16",
+    "Planned for manufacturing, warehousing and logistics",
+    "Free consultation by an expert panel is offered",
+    "Lakhotia Group works with industrial land requirements across West Bengal and Odisha"
+  ],
+  "claims_pending_approval": [
+    {"key": "current_development_bighas", "variants": [800,1000], "reason": "Older creative and LinkedIn descriptions show 800; latest email templates show 1000."},
+    {"key": "expansion_area", "variants": ["2,500+ bighas planned"], "reason": "Must be described as planned, not completed."},
+    {"key": "amenities", "variants": ["fuel/CNG", "EV charging", "hotel/restaurant", "weighbridge", "residential quarters"], "reason": "Marketing assets describe planned features; confirm built/planned status before public use."}
+  ],
+  "prohibited_claim_behaviors": ["Do not assert approved area size unless signed off", "Do not depict planned amenities as operational", "Do not invent discounts, timelines or certifications"],
+  "visual_rules": ["Preserve actual logos from supplied masters", "Preserve exact phone and website", "Use orange sparingly as headline accent", "Separate festival posts from industrial opportunity posts"],
+  "reference_links": ["https://www.instagram.com/lakhotiaindustrialcomplex/", "https://www.linkedin.com/company/lakhotia-industrial-complex/", "https://drive.google.com/drive/folders/1D4zlnXnqC49XQS-Y9HHLcBkkCI8aUJ7T"],
+  "status": "DRAFT_REQUIRES_APPROVAL"
+}

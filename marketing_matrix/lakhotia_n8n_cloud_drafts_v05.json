@@ -1,0 +1,122 @@
+{
+  "name": "MATRIX360 Lakhotia | n8n Cloud Draft Intake v0.5",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "824427e0-92c2-4491-8059-94d70c7c5a3a",
+      "name": "Start Draft Batch",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        220,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const briefs = [\n{topic:'What manufacturers should evaluate before selecting industrial land',objective:'Thought leadership',platform:'LinkedIn'},\n{topic:'Free consultation: plan, set up and grow your industrial operations',objective:'Consultation enquiries',platform:'Instagram'},\n{topic:'How location and road access shape warehouse and logistics operations',objective:'Awareness',platform:'Instagram'}\n];\nreturn briefs.map((b,i)=>({json:{...b,brief_number:i+1,client_id:'lakhotia_industrial_complex',requires_human_approval:true}}));"
+      },
+      "id": "fdf38b50-ddd7-4da6-8f32-4e0e5c882bf1",
+      "name": "Prepare Lakhotia Briefs",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        440,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://YOUR-SECURE-MATRIX360-API-DOMAIN.example/api/generate",
+        "sendBody": true,
+        "contentType": "form-urlencoded",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "topic",
+              "value": "={{ $json.topic }}"
+            },
+            {
+              "name": "objective",
+              "value": "={{ $json.objective }}"
+            },
+            {
+              "name": "platform",
+              "value": "={{ $json.platform }}"
+            }
+          ]
+        },
+        "options": {
+          "timeout": 120000
+        },
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth"
+      },
+      "id": "1a936984-166c-4650-816f-10f528afcf48",
+      "name": "Call Lakhotia Draft API",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        680,
+        300
+      ],
+      "notes": "Set your real HTTPS API host and select an n8n Header Auth credential with name X-Matrix360-Key and a private random token. Never paste secrets into workflow JSON."
+    },
+    {
+      "parameters": {
+        "jsCode": "const base='https://YOUR-SECURE-MATRIX360-API-DOMAIN.example'; return $input.all().map((item,index)=>{const x=item.json; if(!x.id||x.status!=='review'||!Array.isArray(x.candidates)||x.candidates.length!==3) throw new Error('Malformed draft response');return {json:{draft_id:x.id,status:x.status,provider:x.provider,brief_index:index+1,review_url:base+'/draft/'+x.id,preview_urls:(x.preview_urls||[]).map(p=>base+p),compliance:x.compliance,approval_required:true,publication_enabled:false}};});"
+      },
+      "id": "9864aac0-bbd7-442c-b316-2887590c5ad3",
+      "name": "Create Review Queue Entries",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        920,
+        300
+      ],
+      "notes": "Review URL is illustrative; the existing local app uses /draft/{id} and it may require authentication behind a secure access proxy. Do not expose unauthenticated preview URLs."
+    }
+  ],
+  "connections": {
+    "Start Draft Batch": {
+      "main": [
+        [
+          {
+            "node": "Prepare Lakhotia Briefs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Lakhotia Briefs": {
+      "main": [
+        [
+          {
+            "node": "Call Lakhotia Draft API",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call Lakhotia Draft API": {
+      "main": [
+        [
+          {
+            "node": "Create Review Queue Entries",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "active": false,
+  "pinData": {},
+  "tags": []
+}
